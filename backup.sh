@@ -10,7 +10,6 @@ fi
 
 if [ -n "$RESTIC_JSON" ]; then
   RESTIC_ARGS="--json $RESTIC_ARGS"
-  RESTIC_FORGET_ARGS="--json $RESTIC_FORGET_ARGS"
 fi
 
 if [ -n "$RESTIC_TAG" ]; then
@@ -38,6 +37,10 @@ done
 # execute restic forget
 if [ -n "$RESTIC_FORGET_ARGS" ]; then
   
+  if [ -n "$RESTIC_JSON" ]; then
+    RESTIC_FORGET_ARGS="--json $RESTIC_FORGET_ARGS"
+  fi
+
   OUT=$(restic forget $RESTIC_FORGET_ARGS 2>&1)
   
   if [ -n "$REPORT_SCRIPT" ]; then
