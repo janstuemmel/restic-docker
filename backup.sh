@@ -25,7 +25,7 @@ for b in $(ls -d /backup/*); do
   
   OUT=$(restic backup $b $RESTIC_ARGS 2>&1)
   
-  # execute error script if restic backup failed
+  # start report script if defined
   if [ -n "$REPORT_SCRIPT" ]; then
     $REPORT_SCRIPT "$OUT" $REPORT_SCRIPT_AFTER
   fi
