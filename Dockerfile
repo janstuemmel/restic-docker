@@ -11,13 +11,8 @@ RUN curl -sLo /usr/local/bin/tinycron https://github.com/bcicen/tinycron/release
 COPY backup.sh /usr/local/bin/backup
 RUN chmod +x /usr/local/bin/backup
 
-RUN adduser restic --disabled-password && \
+RUN adduser restic --disabled-password --no-create-home && \
     mkdir -p /backup /repo && chown restic:restic /backup /repo
-
-# default args
-ENV CRON @daily
-ENV RESTIC_REPOSITORY /repo
-ENV RESTIC_PASSWORD restic
 
 # run as user
 USER restic

@@ -1,5 +1,10 @@
 #!bin/sh
 
+# default args
+CRON=${CRON:="@daily"}
+RESTIC_REPOSITORY=${RESTIC_REPOSITORY:="/repo"}
+RESTIC_PASSWORD=${RESTIC_PASSWORD:="restic"}
+
 # check if repo exists
 restic snapshots &>/dev/null
 
