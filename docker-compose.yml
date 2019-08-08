@@ -1,0 +1,24 @@
+# example docker-compose file
+# backups this repo without .git folder
+
+version: '3'
+
+services:
+  restic:
+    build: .
+    volumes:
+      - backup:/repo
+      - ./:/backup/example
+    environment:
+      CRON: '*/10 * * * * * *'
+      RESTIC_JSON: 'true'
+      RESTIC_HOST: example_host
+      RESTIC_TAG: example_tag
+      RESTIC_ARGS: --exclude .git
+      RESTIC_FORGET_ARGS: --keep-daily 1
+      # default
+      RESTIC_REPOSITORY: /repo
+      RESTIC_PASSWORD: restic
+
+volumes:
+  backup:
