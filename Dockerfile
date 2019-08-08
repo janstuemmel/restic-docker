@@ -1,7 +1,7 @@
 FROM alpine
 
 # install curl and restic
-RUN apk add --no-cache curl restic
+RUN apk add --update --no-cache curl restic ca-certificates fuse openssh-client
 
 # install tinycron
 RUN curl -sLo /usr/local/bin/tinycron https://github.com/bcicen/tinycron/releases/download/v0.4/tinycron-0.4-linux-amd64 && \
