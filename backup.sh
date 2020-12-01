@@ -47,6 +47,10 @@ if [ -n "$RESTIC_FORGET_ARGS" ]; then
   fi
 
   OUT=$(restic forget $RESTIC_FORGET_ARGS 2>&1)
+
+  if [ $? -gt 0 ]; then
+    restic unlock
+  fi
   
   if [ -n "$REPORT_SCRIPT" ]; then
     $REPORT_SCRIPT "$OUT" $REPORT_SCRIPT_AFTER
