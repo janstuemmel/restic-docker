@@ -19,6 +19,8 @@ services:
     image: janstuemmel/restic 
     restart: always
     volumes:
+      # mount .ssh for remote backup
+      # - ~/.ssh:/app/.ssh:ro
       - backup:/repo
       - data:/backup/data
     environment:
@@ -27,6 +29,8 @@ services:
       RESTIC_HOST: example_host
       RESTIC_TAG: example_tag
       RESTIC_ARGS: --exclude cache
+      # using ssh, disable host key verification
+      # RESTIC_ARGS: -o sftp.command="ssh -o StrictHostKeyChecking=no"
       RESTIC_FORGET_ARGS: --keep-daily 1
       # default
       RESTIC_REPOSITORY: /repo
